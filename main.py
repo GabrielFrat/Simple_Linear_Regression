@@ -78,12 +78,29 @@ class estatistics:
         #                   n 
         self.A = (sum_y - (self.B * sum_x)) / len(x)
 
-    def fit(self):
+    def simple_linear_regression(self):
         self.mmq()
-        print(self.B)
-        print(self.A)
+        valor = input("Informe o valor a ser predito: ")
 
 
+        try:
+            self.x1 = int(valor)
+        except ValueError:
+            try:
+                self.x1 = float(valor)
+            except ValueError:
+                self.x1 = None
+
+        if not isinstance(self.x1, (int, float)):
+            raise TypeError("O valor deve ser um número inteiro ou float.")
+        else:
+            self.y_regression = self.A + (self.B + self.x1)
+            print(self.y_regression)
+
+    def multiple_linear_regression(self):
+        # Formula
+        # y = B0 + B1 x1 + ... + Bn xn
+        pass
 
 valores = {
     'x': [1, 2, 3, 4, 5],
@@ -93,4 +110,4 @@ valores = {
 base = pd.DataFrame(valores)
 
 estatistica = estatistics(base['x'], base['y'])
-estatistica.fit()
+estatistica.simple_linear_regression()
